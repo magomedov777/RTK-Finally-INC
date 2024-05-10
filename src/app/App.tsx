@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import {
   AppBar,
   Button,
@@ -10,36 +10,36 @@ import {
   LinearProgress,
   Toolbar,
   Typography,
-} from "@mui/material";
-import { Menu } from "@mui/icons-material";
-import { Login } from "features/auth/ui/login/login";
-import "./App.css";
-import { TodolistsList } from "features/TodolistsList/TodolistsList";
-import { ErrorSnackbar } from "common/components";
-import { useActions } from "common/hooks";
-import { selectIsLoggedIn } from "features/auth/model/auth.selectors";
-import { selectAppStatus, selectIsInitialized } from "app/app.selectors";
-import { authThunks } from "features/auth/model/auth.slice";
+} from '@mui/material'
+import { Menu } from '@mui/icons-material'
+import { Login } from 'features/auth/ui/login/login'
+import './App.css'
+import { TodolistsList } from 'features/TodolistsList/ui/TodolistsList'
+import { ErrorSnackbar } from 'common/components'
+import { useActions } from 'common/hooks'
+import { selectIsLoggedIn } from 'features/auth/model/auth.selectors'
+import { selectAppStatus, selectIsInitialized } from 'app/app.selectors'
+import { authThunks } from 'features/auth/model/auth.slice'
 
 function App() {
-  const status = useSelector(selectAppStatus);
-  const isInitialized = useSelector(selectIsInitialized);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const status = useSelector(selectAppStatus)
+  const isInitialized = useSelector(selectIsInitialized)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
-  const { initializeApp, logout } = useActions(authThunks);
+  const { initializeApp, logout } = useActions(authThunks)
 
   useEffect(() => {
-    initializeApp();
-  }, []);
+    initializeApp()
+  }, [])
 
-  const logoutHandler = () => logout();
+  const logoutHandler = () => logout()
 
   if (!isInitialized) {
     return (
-      <div style={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
+      <div style={{ position: 'fixed', top: '30%', textAlign: 'center', width: '100%' }}>
         <CircularProgress />
       </div>
-    );
+    )
   }
 
   return (
@@ -58,17 +58,17 @@ function App() {
               </Button>
             )}
           </Toolbar>
-          {status === "loading" && <LinearProgress />}
+          {status === 'loading' && <LinearProgress />}
         </AppBar>
         <Container fixed>
           <Routes>
-            <Route path={"/"} element={<TodolistsList />} />
-            <Route path={"/login"} element={<Login />} />
+            <Route path={'/'} element={<TodolistsList />} />
+            <Route path={'/login'} element={<Login />} />
           </Routes>
         </Container>
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
