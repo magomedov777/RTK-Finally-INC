@@ -35,8 +35,8 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, AddTaskArgType>(
         const task = res.data.data.item
         return { task }
       } else {
-        handleServerAppError(res.data, dispatch)
-        return rejectWithValue(null)
+        handleServerAppError(res.data, dispatch, false)
+        return rejectWithValue(res.data)
       }
     })
   },
@@ -142,7 +142,6 @@ export const tasksReducer = slice.reducer
 export const tasksThunks = { fetchTasks, addTask, updateTask, removeTask }
 export const { selectTasks } = slice.selectors
 
-// types
 export type UpdateDomainTaskModelType = {
   title?: string
   description?: string
