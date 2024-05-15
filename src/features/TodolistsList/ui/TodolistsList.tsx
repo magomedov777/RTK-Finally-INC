@@ -25,7 +25,9 @@ export const TodolistsList = () => {
     fetchTodolists()
   }, [])
 
-  const addTodolist = (title: string) => addTodolistThunk(title)
+  const addTodolist = (title: string) => {
+    return addTodolistThunk(title).unwrap()
+  }
 
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />
